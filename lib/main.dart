@@ -6,13 +6,14 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:sizer/sizer.dart';
 import 'view/AppConstants.dart/constants.dart';
 
+late Box<CartModel> box;
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Hive.initFlutter();
   Hive.registerAdapter(CartModelAdapter());
 
-  var box = await Hive.openBox<CartModel>('cartBox');
+   box = await Hive.openBox<CartModel>('cartBox');
 
   runApp(const MyApp());
 }

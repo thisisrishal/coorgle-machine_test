@@ -1,6 +1,8 @@
+import 'package:coorgle_machine_test/controller/cart_controller.dart';
 import 'package:coorgle_machine_test/view/AppConstants.dart/product_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 import 'AppConstants.dart/constants.dart';
@@ -12,12 +14,13 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
+final cartC = Get.put(CartController());
+
 class _HomeScreenState extends State<HomeScreen> {
   @override
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       body: AnimationLimiter(
         child: GridView.count(
           physics: const BouncingScrollPhysics(
@@ -52,16 +55,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                 // width: 20.w,
                                 height: 10.h,
                                 decoration: BoxDecoration(
-                                    color: Colors.red,
+                                    // color: Colors.red,
                                     borderRadius: customBorderRadius4,
                                     image: DecorationImage(
                                         image: NetworkImage(
-                                            Products[index]['image']),
+                                            Products[index].image),
                                         fit: BoxFit.cover)),
                               ),
                               AppSize.kSizedBox10h,
                               CardText(
-                                  text: Products[index]['title'],
+                                  text: Products[index].title,
                                   fontSize: 13.sp,
                                   width: 55.w),
                               AppSize.kSizedBox10h,
@@ -71,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 children: [
                                   LineThroughText(
                                     text:
-                                        '\$${Products[index]['price'].toString()}',
+                                        '\$${Products[index].price.toString()}',
                                     fontSize: 13.sp,
                                   ),
                                   AppSize.kSizedBox10w,
@@ -79,15 +82,22 @@ class _HomeScreenState extends State<HomeScreen> {
                                     child: CardText(
                                       width: 20.w,
                                       text:
-                                          '\$${Products[index]['offerPrice'].toString()}',
+                                          '\$${Products[index].offerPrice.toString()}',
                                       fontSize: 13.sp,
-                                      color: Colors.red,
+                                      // color: Colors.red,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  const Expanded(
-                                      child: Icon(
-                                          Icons.add_shopping_cart_outlined))
+                                  Expanded(
+                                      child: GestureDetector(
+                                    onTap: () {
+                                      cartC.getCartList();
+                                      cartC.addToCart(
+                                          Products[index]);
+                                    },
+                                    child: const Icon(
+                                        Icons.add_shopping_cart_outlined),
+                                  ))
                                 ],
                               )
                             ],

@@ -8,6 +8,6 @@ class Routes {
   static final routes = [
     GetPage(name: '/splash', page: () => const SplashScreen()),
     GetPage(name: '/home', page: () => const HomeScreen()),
-    GetPage(name: '/cart', page: () => const Cart()),
+    GetPage(name: '/cart', page: () =>  Cart()),
   ];
 }

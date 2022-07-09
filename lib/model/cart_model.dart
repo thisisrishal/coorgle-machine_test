@@ -32,4 +32,8 @@ class CartModel extends HiveObject {
 
   @HiveField(6)
   late String image;
+
+  
+
+
 }
