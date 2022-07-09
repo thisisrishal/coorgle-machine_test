@@ -2,9 +2,14 @@ import 'package:coorgle_machine_test/view/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 
-class NavDrawer extends StatelessWidget {
+class NavDrawer extends StatefulWidget {
   const NavDrawer({Key? key}) : super(key: key);
 
+  @override
+  State<NavDrawer> createState() => _NavDrawerState();
+}
+
+class _NavDrawerState extends State<NavDrawer> {
   @override
   Widget build(BuildContext context) {
     const drawerHeader = UserAccountsDrawerHeader(
@@ -32,7 +37,7 @@ class NavDrawer extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Coorgle '),
         ),
-        body: const HomeScreen(),
+        body:  HomeScreen(),
         drawer: Drawer(
           child: drawerItems,
         ));

@@ -12,7 +12,6 @@ class AppColor {
 class AppSize {
   static SizedBox kSizedBox10h = SizedBox(height: 1.h);
   static SizedBox kSizedBox10w = SizedBox(width: 1.h);
-
 }
 
 class HeadTitle extends StatelessWidget {
@@ -98,5 +97,74 @@ class LineThroughText extends StatelessWidget {
           color: AppColor.kLightGrey,
           fontSize: fontSize,
         ));
+  }
+}
+
+class CustomTextField extends StatelessWidget {
+  final TextEditingController controller;
+  final String label;
+  final Widget icon;
+  final bool obscureText;
+  final Widget suffixIcon;
+  final TextInputType keyboardType;
+  final String? Function(String?) validator;
+  final String? Function(String?)? onChanged;
+
+  const CustomTextField(
+      {Key? key,
+      required this.controller,
+      required this.label,
+      required this.icon,
+      this.obscureText = false,
+      this.suffixIcon = const SizedBox(),
+      this.keyboardType = TextInputType.multiline,
+      required this.validator,
+      this.onChanged})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(4.0),
+      child: TextFormField(
+          keyboardType: keyboardType,
+          // keyboardType: keyboard,  
+          onChanged: onChanged,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          controller: controller,
+          validator: validator,
+          obscureText: obscureText,
+          style: const TextStyle(height: 1),
+          decoration: InputDecoration(
+              border: const OutlineInputBorder(
+                  borderSide: BorderSide(
+                color: AppColor.kLightGrey,
+                // width: 0,
+              )),
+              focusedBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(
+                width: 1,
+              )),
+              enabledBorder: const OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: AppColor.kLightGrey,
+                  width: 0,
+                ),
+              ),
+              labelText: label,
+              labelStyle: TextStyle(
+                color: AppColor.kLightGrey,
+                fontSize: 12.sp,
+              ),
+              // hintText: 'Enter Your Mobile Number',
+              hintStyle:
+                  const TextStyle(fontSize: 12, color: AppColor.kLightGrey),
+              prefixIcon: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: icon),
+              prefixIconConstraints:
+                  const BoxConstraints(minWidth: 24, minHeight: 24),
+              suffixIcon: suffixIcon)),
+    );
   }
 }

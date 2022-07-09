@@ -9,6 +9,8 @@ class CartController extends GetxController {
     super.onInit();
   }
 
+  var isCartItem = false.obs;
+
   final cartList = [].obs;
 
   addToCart(CartModel value) async {
@@ -40,5 +42,6 @@ class CartController extends GetxController {
 
   getCartList() async {
     cartList.value = box.values.toList();
+    update();
   }
 }
